@@ -8,7 +8,6 @@ Backend application untuk toko fashion online dengan sistem autentikasi, manajem
 - **MySQL** - Database
 - **JWT** - Authentication
 - **Multer** & **Sharp** - Upload & resize gambar
-- **Nodemailer** - Email OTP verification
 - **Bcrypt** - Password hashing
 
 ## 📦 Instalasi
@@ -34,13 +33,24 @@ Buat file `.env` di root directory:
 ```env
 PORT=5000
 DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=ecommerce_db
-JWT_SECRET=your_jwt_secret_key
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_email_password
+DB_USER=admin
+DB_PASS=masuk
+DB_NAME=baju_db
+JWT_SECRET=rahasia_negara_api
 ```
+
+## 🗄️ Setup Database & Admin
+
+```bash
+# Reset database dan seed admin secara otomatis
+node reset-db.js
+```
+
+**Default Admin Credentials:**
+- Email: `admin@example.com`
+- Password: `Admin123!`
+
+> ⚠️ **PENTING**: Ganti password admin setelah login pertama kali!
 
 ## 📚 API Endpoints
 
@@ -48,12 +58,9 @@ EMAIL_PASS=your_email_password
 
 | Method | Endpoint | Deskripsi | Auth Required |
 |--------|----------|-----------|---------------|
-| POST | `/api/auth/register` | Register user baru | ❌ |
-| POST | `/api/auth/verify-otp` | Verifikasi OTP email | ❌ |
-| POST | `/api/auth/login` | Login user | ❌ |
-| POST | `/api/auth/forgot-password` | Kirim OTP reset password | ❌ |
-| POST | `/api/auth/reset-password` | Reset password | ❌ |
-| POST | `/api/auth/resend-otp` | Kirim ulang OTP | ❌ |
+| POST | `/api/auth/login` | Login admin | ❌ |
+
+> **Catatan**: Fitur registrasi dan verifikasi email telah dihapus. Akun admin dibuat melalui seeder otomatis.
 
 ### 👤 User
 
@@ -102,20 +109,6 @@ Authorization: Bearer <your_jwt_token>
 
 ## 📝 Contoh Request
 
-### Register User
-
-```bash
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "username": "johndoe",
-  "email": "john@example.com",
-  "password": "password123",
-  "fullName": "John Doe"
-}
-```
-
 ### Login
 
 ```bash
@@ -123,8 +116,16 @@ POST /api/auth/login
 Content-Type: application/json
 
 {
-  "email": "john@example.com",
-  "password": "password123"
+  "email": "admin@example.com",
+  "password": "Admin123!"
+}
+```
+
+**Response:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "role": "admin"
 }
 ```
 
@@ -157,7 +158,12 @@ Gambar otomatis di-compress menggunakan Sharp untuk optimasi performa.
 
 ## 👨‍💼 Admin Access
 
-Untuk mengakses endpoint admin, user harus memiliki `role = 'admin'` di database.
+Akun admin dibuat otomatis melalui seeder saat menjalankan `node reset-db.js`. Tidak ada fitur registrasi manual.
+
+**Untuk menambah admin baru:**
+1. Edit file `seeders/adminSeeder.js`
+2. Tambahkan kredensial admin baru
+3. Jalankan `node reset-db.js`
 
 ## 📁 Struktur Folder
 
@@ -168,18 +174,19 @@ backend/
 ├── middleware/      # Auth, upload, admin check
 ├── models/          # Database models
 ├── routes/          # API routes
+├── seeders/         # Database seeders (admin)
 ├── uploads/         # Uploaded images
-├── utils/           # Helper functions
 ├── .env             # Environment variables
-└── server.js        # Entry point
+├── index.js         # Entry point
+└── reset-db.js      # Database reset & seed script
 ```
 
 ## 🐛 Debugging
 
-Jika ada masalah dengan upload gambar atau database, cek:
+Jika ada masalah, cek:
 1. Permissions folder `/uploads`
 2. Database connection di `.env`
-3. Email SMTP settings untuk OTP
+3. Pastikan `node reset-db.js` sudah dijalankan
 
 ## 📞 Kontak & Support
 
