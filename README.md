@@ -50,7 +50,7 @@ node reset-db.js
 - Email: `admin@example.com`
 - Password: `Admin123!`
 
-> ⚠️ **PENTING**: Ganti password admin setelah login pertama kali!
+> ⚠️ **PENTING**: Ganti password Admin saat deploy production!
 
 ## 📚 API Endpoints
 
@@ -191,8 +191,7 @@ Jika ada masalah, cek:
 ## 📞 Kontak & Support
 
 Untuk pertanyaan atau masalah, silakan hubungi developer.
-
----
+083872003995
 
 **Version**: 1.0.0  
 **Last Updated**: Desember 2025
