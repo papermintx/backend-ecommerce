@@ -62,13 +62,6 @@ node reset-db.js
 
 > **Catatan**: Fitur registrasi dan verifikasi email telah dihapus. Akun admin dibuat melalui seeder otomatis.
 
-### 👤 User
-
-| Method | Endpoint | Deskripsi | Auth Required |
-|--------|----------|-----------|---------------|
-| GET | `/api/users/profile` | Get user profile | ✅ |
-| PUT | `/api/users/profile` | Update profile | ✅ |
-
 ### 🛍️ Products
 
 | Method | Endpoint | Deskripsi | Auth Required |
