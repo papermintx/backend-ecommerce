@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 // CORS Configuration - Allow all origins for development
 const corsOptions = {
-    origin: ['https://frontend-ecommerce-gold.vercel.app', 'http://localhost:3000'],
+    origin: "*",
     credentials: true,
     optionsSuccessStatus: 200,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
